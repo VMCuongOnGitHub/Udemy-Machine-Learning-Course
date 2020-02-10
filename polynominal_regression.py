@@ -1,6 +1,7 @@
 # Data Preprocessing Template
 
 # Importing the libr
+import statsmodels.api as sm
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
