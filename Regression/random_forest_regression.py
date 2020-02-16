@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
-dataset = pd.read_csv('datasets/Position_Salaries.csv')
+dataset = pd.read_csv('../datasets/Position_Salaries.csv')
 # Features
 X = dataset.iloc[:, 1:2].values
 # Dependent Variable, the thing that we want to predict
@@ -39,11 +39,12 @@ X_test = sc_X.transform(X_test)
 sc_y = StandardScaler()
 y_train = sc_y.fit_transform(y_train.reshape(-1,1))"""
 
-from sklearn.tree import DecisionTreeRegressor
-regressor = DecisionTreeRegressor(random_state=0)
+# fitting RFR
+from sklearn.ensemble import RandomForestRegressor
+regressor = RandomForestRegressor(n_estimators=100, random_state=0)
 regressor.fit(X, y)
 
-# y_pred = regressor.predict(6.5)
+y_pred = regressor.predict([[6.5]])
 
 # Visualize the Linear Regression
 X_grid = np.arange(min(X), max(X), 0.01)

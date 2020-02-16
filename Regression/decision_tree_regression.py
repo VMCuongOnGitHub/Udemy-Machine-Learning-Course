@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
-dataset = pd.read_csv('datasets/Position_Salaries.csv')
+dataset = pd.read_csv('../datasets/Position_Salaries.csv')
 # Features
 X = dataset.iloc[:, 1:2].values
 # Dependent Variable, the thing that we want to predict
@@ -39,23 +39,15 @@ X_test = sc_X.transform(X_test)
 sc_y = StandardScaler()
 y_train = sc_y.fit_transform(y_train.reshape(-1,1))"""
 
-from sklearn.linear_model import LinearRegression
-lin_reg = LinearRegression()
-lin_reg.fit(X, y)
+from sklearn.tree import DecisionTreeRegressor
+regressor = DecisionTreeRegressor(random_state=0)
+regressor.fit(X, y)
 
-from sklearn.preprocessing import PolynomialFeatures
-poly_reg = PolynomialFeatures(degree=3)
-X_poly = poly_reg.fit_transform(X)
-
-lin_reg_2 = LinearRegression()
-lin_reg_2.fit(X_poly, y)
+# y_pred = regressor.predict(6.5)
 
 # Visualize the Linear Regression
-plt.scatter(X, y, color='red')
-plt.plot(X, lin_reg.predict(X), color='blue')
-plt.show()
-
-# Visualize the Polynomial Regression
-plt.scatter(X, y, color='red')
-plt.plot(X, lin_reg_2.predict(X_poly), color='blue')
+X_grid = np.arange(min(X), max(X), 0.01)
+X_grid = X_grid.reshape((len(X_grid), 1))
+plt.scatter(X, y, color="red")
+plt.plot(X_grid, regressor.predict(X_grid), color='blue')
 plt.show()
